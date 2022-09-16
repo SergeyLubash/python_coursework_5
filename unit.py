@@ -31,31 +31,33 @@ class BaseUnit(ABC):
 
     @property
     def health_points(self):
-        return round(self.hp, 1) # TODO возвращаем аттрибут hp в красивом виде
+        return round(self.hp, 1) # возвращаем аттрибут hp в красивом виде
 
     @property
     def stamina_points(self):
-        return round(self.stamina, 1)  # TODO возвращаем аттрибут stamina в красивом виде
+        return round(self.stamina, 1)  # возвращаем аттрибут stamina в красивом виде
 
     def equip_weapon(self, weapon: Weapon):
-        # TODO присваиваем нашему герою новое оружие
+        # присваиваем нашему герою новое оружие
         self.weapon = weapon
         return f"{self.name} экипирован оружием {self.weapon.name}"
 
     def equip_armor(self, armor: Armor):
-        # TODO одеваем новую броню
+        # одеваем новую броню
         self.armor = armor
         return f"{self.name} экипирован броней {self.armor.name}"
 
     def _count_damage(self, target: BaseUnit) -> int:
-        # TODO Эта функция должна содержать:
-        #  логику расчета урона игрока
-        #  логику расчета брони цели
-        #  здесь же происходит уменьшение выносливости атакующего при ударе
-        #  и уменьшение выносливости защищающегося при использовании брони
-        #  если у защищающегося нехватает выносливости - его броня игнорируется
-        #  после всех расчетов цель получает урон - target.get_damage(damage)
-        #  и возвращаем предполагаемый урон для последующего вывода пользователю в текстовом виде
+        """
+        Эта функция должна содержать:
+        логику расчета урона игрока
+        логику расчета брони цели
+        здесь же происходит уменьшение выносливости атакующего при ударе
+        и уменьшение выносливости защищающегося при использовании брони
+        если у защищающегося нехватает выносливости - его броня игнорируется
+        после всех расчетов цель получает урон - target.get_damage(damage)
+        и возвращаем предполагаемый урон для последующего вывода пользователю в текстовом виде
+        """
 
         self.stamina -= self.weapon.stamina_per_hit * self.unit_class.stamina
         damage = self.weapon.damage * self.unit_class.attack
@@ -67,8 +69,8 @@ class BaseUnit(ABC):
         return target.get_damage(damage)
 
     def get_damage(self, damage: int) -> Optional[int]:
-        # TODO получение урона целью
-        #      присваиваем новое значение для аттрибута self.hp
+        # получение урона целью
+        # присваиваем новое значение для аттрибута self.hp
         if damage > 0:
             self.hp -= damage
             return round(damage, 1)
@@ -126,7 +128,7 @@ class EnemyUnit(BaseUnit):
         Если умение не применено, противник наносит простой удар, где также используется
         функция _count_damage(target
         """
-        # TODO результат функции должен возвращать результат функции skill.use или же следующие строки:
+        # результат функции должен возвращать результат функции skill.use или же следующие строки:
         if self._is_skill_used and self.stamina >= self.unit_class.skill.stamina and randint(0, 100) < 10:
             return self.use_skill(target)
 
