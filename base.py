@@ -46,10 +46,9 @@ class Arena(metaclass=BaseSingleton):
             self.battle_result = "Игрок проиграл битву"
 
         elif self.enemy.hp <= 0:
-            self.battle_result ="Игрок выиграл битву"
+            self.battle_result = "Игрок выиграл битву"
 
         self._end_game()
-
 
     def _stamina_regeneration(self):
         """
@@ -65,8 +64,6 @@ class Arena(metaclass=BaseSingleton):
             else:
                 unit.stamina += self.STAMINA_PER_ROUND
 
-
-
     def next_turn(self):
         """
         СЛЕДУЮЩИЙ ХОД -> return result | return self.enemy.hit(self.player)
@@ -77,7 +74,6 @@ class Arena(metaclass=BaseSingleton):
         тогда запускаем процесс регенирации стамины и здоровья для игроков (self._stamina_regeneration)
         и вызываем функцию self.enemy.hit(self.player) - ответный удар врага
         """
-
         result = self._check_players_hp()
         if result is not None:
             return result

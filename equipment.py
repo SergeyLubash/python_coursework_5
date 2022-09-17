@@ -22,7 +22,7 @@ class Weapon:
     stamina_per_hit: float
 
     @property
-    def damage(self):
+    def damage(self) -> float:
         return round(uniform(self.min_damage, self.max_damage), 1)
 
 
@@ -35,7 +35,7 @@ class EquipmentData:
 
 class Equipment:
 
-    def __init__(self):
+    def __init__(self) -> str:
         self.equipment = self._get_equipment_data()
 
     def get_weapon(self, name: str) -> Optional[Weapon]:

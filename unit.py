@@ -30,19 +30,19 @@ class BaseUnit(ABC):
         pass
 
     @property
-    def health_points(self):
-        return round(self.hp, 1) # возвращаем аттрибут hp в красивом виде
+    def health_points(self) -> float:
+        return round(self.hp, 1)  # возвращаем аттрибут hp в красивом виде
 
     @property
-    def stamina_points(self):
+    def stamina_points(self) -> float:
         return round(self.stamina, 1)  # возвращаем аттрибут stamina в красивом виде
 
-    def equip_weapon(self, weapon: Weapon):
+    def equip_weapon(self, weapon: Weapon) -> str:
         # присваиваем нашему герою новое оружие
         self.weapon = weapon
         return f"{self.name} экипирован оружием {self.weapon.name}"
 
-    def equip_armor(self, armor: Armor):
+    def equip_armor(self, armor: Armor) -> str:
         # одеваем новую броню
         self.armor = armor
         return f"{self.name} экипирован броней {self.armor.name}"
@@ -116,6 +116,7 @@ class PlayerUnit(BaseUnit):
              f"{self.name} используя {self.weapon.name} наносит удар, "
              f"но {target.armor.name} cоперника его останавливает."
         )
+
 
 class EnemyUnit(BaseUnit):
 
